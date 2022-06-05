@@ -1,47 +1,54 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
-const Father = styled.div`
+const Wrapper = styled.div`
   display: flex;
 `;
 
+const animation = keyframes`
+  0%{
+    transform:rotate(0deg);
+    border-radius:0px;
+  }
+  50%{
+    
+    border-radius:100px;
+  }
+  100%{
+    transform:rotate(360deg);
+    border-radius:0px;
+  }
+`;
+
+const Emoji = styled.span`
+  font-size: 100px;
+  color: ${(props) => props.theme.textColor};
+`;
+
 const Box = styled.div`
-  background-color: ${(props) => props.bgColor};
-  width: 100px;
-  height: 100px;
-`;
-
-const Circle = styled(Box)`
-  border-radius: 50px;
-`;
-
-const Btn = styled.button`
-  background-color: tomato;
-  color: white;
-  border-radius: 15px;
-  height: 20px;
-  border: 0;
-`;
-
-const Input = styled.input.attrs({ required: true })`
-  background-color: tomato;
+  background-color: ${(props) => props.theme.backgroundColor};
+  height: 200px;
+  width: 200px;
+  animation: ${animation} 1s linear infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  ${Emoji} {
+    &:hover {
+      font-size: 200px;
+    }
+    &:active {
+      opacity: 0;
+    }
+  }
 `;
 
 function App() {
   return (
-    <Father>
-      <Box bgColor="tomato" />
-      <Circle bgColor="teal" />
-      <Btn>Hello</Btn>
-      <Btn as="a" href="/">
-        Hello link
-      </Btn>
-
-      <Input />
-      <Input />
-      <Input />
-      <Input />
-      <Input />
-    </Father>
+    <Wrapper>
+      <Box>
+        <Emoji as="p">😃Hi</Emoji>
+      </Box>
+    </Wrapper>
   );
 }
 
